@@ -20,7 +20,7 @@ public class LabelFrame extends JFrame {
 		setLayout(new FlowLayout()); // set frame layout
 
 //JLabel constructor with a string argument
-		label1 = new JLabel("Syamil Difaul Haq Sukur");
+		label1 = new JLabel("Syamil Difaul Haq Sukur 05111940000196");
 		label1.setToolTipText("This is label1");
 		add(label1); // add label1 to JFrame
 
