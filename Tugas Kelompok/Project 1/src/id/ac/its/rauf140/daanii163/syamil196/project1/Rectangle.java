@@ -1,4 +1,4 @@
-package id.ac.its.muhammadnurabdurrauf140.shapeapp;
+package id.ac.its.rauf140.daanii163.syamil196.project1;
 
 public class Rectangle extends Shape {
 	
