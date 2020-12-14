@@ -73,3 +73,7 @@ public void move() {
     visible = false;
 }
 ```
+
+## **Kelas `SpaceShip`**
+
+## **Kelas `Board`**

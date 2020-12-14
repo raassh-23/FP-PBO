@@ -21,7 +21,7 @@ public class CollisionEx extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+    
     public static void main(String[] args) {
         
         EventQueue.invokeLater(() -> {
