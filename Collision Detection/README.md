@@ -76,4 +76,92 @@ public void move() {
 
 ## **Kelas `SpaceShip`**
 
+Terdapat atribut `dx` dan `dy` sebagai perubahan posisi. Ada juga atribut list `missile` untuk menyimpan objek-objek `Missile` yang ditembakkan.
+
+Terdapat _method_ `initCraft` yang mengambil gambar `sprite` dan inisialisasi `missile`. Sama dengan kelas objek _sprite_ lainnya, terdapat kelas `move` yang pertambahan perpindahannya adalah sesuai `dx` dan `dy`.
+
+```java
+public void move() {
+
+    x += dx;
+    y += dy;
+
+    if (x < 1) {
+        x = 1;
+    }
+
+    if (y < 1) {
+        y = 1;
+    }
+}
+```
+
+_Method_ `fire` dipanggil saat pemain menembakkan misil. _Method_ ini menambahkan objek `Missile` pada list `missile` tadi. Kemudian ada juga _method_ `getMissile` untuk mengembalikan list `missile` tadi.
+
+```java
+public void fire() {
+    missiles.add(new Missile(x + width, y + height / 2);
+}
+```
+
+Objek `SpaceShip` merupakan objek yang akan dikontrol pemain sehingga perlu dilakukan deteksi terhadap _keyboard_ yang akan menjadi input pergerakan pesawat. Untuk itu kelas ini menggunakan kelas `java.awt.event.KeyEvent`.
+
+Input yang digunakan adalah tombol Spasi untuk menembak dan tombol Arrow untuk kendali. _Method_ `keyPressed` mendeteksi tombol _keyboard_ yang ditekan pemain. Kemudian akan dijalankan perintah sesuai tombol yang ditekan:
+1. `SPACE`: memanggil `fire` untuk menembak;
+2. `UP`: _set_ `dy` menjadi `1`;
+3. `DOWN`: _set_ `dy` menjadi `-1`;
+4. `RIGHT`: _set_ `dx` menjadi `1`;
+5. `LEFT`: _set_ `dx` menjadi `-1`;
+
+```java
+public void keyPressed(KeyEvent e) {
+
+    int key = e.getKeyCode();
+
+    if (key == KeyEvent.VK_SPACE) {
+        fire();
+    }
+
+    if (key == KeyEvent.VK_LEFT) {
+        dx = -1;
+    }
+
+    if (key == KeyEvent.VK_RIGHT) {
+        dx = 1;
+    }
+
+    if (key == KeyEvent.VK_UP) {
+        dy = -1;
+    }
+
+    if (key == KeyEvent.VK_DOWN) {
+        dy = 1;
+    }
+}
+```
+
+Kemudian pada _method_ `keyReleased`, saat tombol tadi dilepas, `dx` dan `dy` akan kembali di-_set_ `0` sesuai tombol yang dilepas.
+
+```java
+public void keyReleased(KeyEvent e) {
+
+    int key = e.getKeyCode();
+
+    if (key == KeyEvent.VK_LEFT) {
+        dx = 0;
+    }
+
+    if (key == KeyEvent.VK_RIGHT) {
+        dx = 0;
+    }
+
+    if (key == KeyEvent.VK_UP) {
+        dy = 0;
+    }
+
+    if (key == KeyEvent.VK_DOWN) {
+        dy = 0;
+    }
+}
+```
 ## **Kelas `Board`**
