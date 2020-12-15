@@ -56,6 +56,7 @@ public void move() {
     x -= 1;
 }
 ```
+
 ## **Kelas `Missile`**
 
 Atribut tambahan untuk kelas ini adalah `BOARD_WIDTH` yang merupakan batas lebar sebelum _sprite_ misil hilang. `BOARD_WIDTH` merupakan atribut final dengan nilai `390` sehingga misil akan hilang sebelum sampai di tepi kanvas.
