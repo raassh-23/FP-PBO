@@ -37,6 +37,7 @@ _Method_ `initAlien` berfungsi me-_load_ gambar _sprite_ dan mengambil ukurannya
 
 ```java
 private void initAlien() {
+
     loadImage("src/resources/alien.png");
     getImageDimensions();
 }
@@ -45,6 +46,7 @@ _Method_ `move` dipanggil untuk perubahan posisi Alien. Karena Alien bergerak te
 
 ```java
 public void move() {
+
     if (x < 0) {
         x = INITIAL_X;
     }
@@ -62,11 +64,13 @@ _Method_ hampir sama dengan kelas `Alien` hanya pada _method_ `move` variabel `x
 
 ```java
 private void initMissile() {
+
     loadImage("src/resources/missile.png");
     getImageDimensions();        
 }
 
-public void move() {       
+public void move() {   
+
     x += MISSILE_SPEED;
         
     if (x > BOARD_WIDTH)
@@ -165,3 +169,26 @@ public void keyReleased(KeyEvent e) {
 }
 ```
 ## **Kelas `Board`**
+Kelas ini adalah kelas utama yang akan dipanggil saat _game_ dijalankan. Sehingga, hampir semua instruksi dan logika agar _game_ berjalan sesuai keinginan ada di kelas ini.
+
+Kelas ini memiliki atribut:
+1. `spaceship` sebagai objek SpaceShip.
+2. `aliens` berupa List untuk menampung objek objek Alien.
+3. `ingame` berupa boolean untuk indikator masih dalam _game_ atau tidak.
+4. `ICRAFT_X` dan `ICRAFT_Y` sebagai atribut konstan posisi awal `spaceship`.
+5. `B_WIDTH` dan `B_HEIGHT` sebagai atribut konstan ukuran _board_.
+6. `timer` dan `DELAY` untuk mengatur _update_ pada kondisi _game_.
+7. `pos` yang merupakan daftar posisi awal dari Alien.
+```java
+private final int[][] pos = {
+    {2380, 29}, {2500, 59}, {1380, 89},
+    {780, 109}, {580, 139}, {680, 239},
+    {790, 259}, {760, 50}, {790, 150},
+    {980, 209}, {560, 45}, {510, 70},
+    {930, 159}, {590, 80}, {530, 60},
+    {940, 59}, {990, 30}, {920, 200},
+    {900, 259}, {660, 50}, {540, 90},
+    {810, 220}, {860, 20}, {740, 180},
+    {820, 128}, {490, 170}, {700, 30}
+};
+```
