@@ -10,6 +10,8 @@ Akan tetapi, sebelum itu perlu kita buat _class_ untuk meng-_handle_ objek yang 
 2. Kelas `Board` sebagai kanvas dari permainan dan juga kelas yang menginisialisasi permainan.
 3. Kelas `CollissionEx` sebagai _driver class_.
 
+![Diagram kelas dari kelas yang dibutuhkan](https://github.com/raassh-23/fp-pbo/blob/main/Collision%20Detection/Class%20Diagram%20Collision%20Detection.jpg)
+
 ## **Kelas `Sprite`**
 
 Kelas ini merupakan _parent class_ untuk objek _sprite_ alien, misil, dan pesawat pemain. Untuk itu, atribut yang diperlukan:
@@ -192,3 +194,210 @@ private final int[][] pos = {
     {820, 128}, {490, 170}, {700, 30}
 };
 ```
+Saat objek Board dibuat, akan dipanggil _method_ `initBoard` untuk mengatur `timer`, mengatur board (ukuran, _background_, dll.), menambahkan _keyListener_ untuk mendeteksi input _keyboard_, dan memanggil _method_ `initAlien`. `initAlien` mengisi `aliens` dengan objek-objek Alien dengan posisi yang ditentukan oleh `pos`.
+
+```java
+public void initAliens() {
+        
+    aliens = new ArrayList<>();
+
+    for (int[] p : pos) {
+        aliens.add(new Alien(p[0], p[1]));
+    }
+}
+```
+Kemudian pada _method_ `paintComponent` akan dicek kondisi `ingame`. Jika masih dalam permainan (`ingame` bernilai `true`) maka akan memanggil _method_ `drawObjects` untuk menggambar objek dalam _game_. Jika tidak (`ingame` bernilai `false`) akan dipanggil _method_ `drawGameOver` untuk menampilkan layar _game over_.
+```java
+@Override
+public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+
+    if (ingame) {
+        drawObjects(g);
+
+    } else {
+        drawGameOver(g);
+    }
+
+    Toolkit.getDefaultToolkit().sync();
+}
+```
+_Method_ `drawObjects` menggambar objek-objek dalam permainan. Dimulai dengan menggambar pesawat pemain (`spaceship`) dan misil yang ditembakkan (didapat dari `spaceship.getMissiles()`) dengan terlebih dahulu mengecek visibilitasnya.
+```java
+private void drawObjects(Graphics g) {
+
+    if (spaceship.isVisible()) {
+        g.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(),
+            this);
+    }
+    
+    List<Missile> ms = spaceship.getMissiles();
+
+    for (Missile missile : ms) {
+        if (missile.isVisible()) {
+            g.drawImage(missile.getImage(), missile.getX(), 
+                missile.getY(), this);
+        }
+    }
+...
+}   
+```
+Selanjutnya menggambar semua alien pada `aliens` dengan _looping_ dan juga mengecek apakah alien sudah ter-_destroy_ dengan cek visibilitas terlebih dahulu.
+```java
+private void drawObjects(Graphics g) {
+...
+    for (Alien alien : aliens) {
+        if (alien.isVisible()) {
+            g.drawImage(alien.getImage(), alien.getX(), alien.getY(), this);
+        }
+    }
+...
+}   
+```
+Kemudian yang terakhir menggambar indikator jumlah alien tersisa di pojok kiri atas board.
+```java
+private void drawObjects(Graphics g) {
+
+...
+    g.setColor(Color.WHITE);
+    g.drawString("Aliens left: " + aliens.size(), 5, 15);
+}   
+```
+Selanjutnya _method_ `drawGameOver` menggambar layar _game over_ yaitu pesan "Game Over" di tengah board saat permainan selesai (tersissa 0 alien atau pesawat menabrak alien).
+```java
+private void drawGameOver(Graphics g) {
+
+    String msg = "Game Over";
+    Font small = new Font("Helvetica", Font.BOLD, 14);
+    FontMetrics fm = getFontMetrics(small);
+
+    g.setColor(Color.white);
+    g.setFont(small);
+    g.drawString(msg, (B_WIDTH - fm.stringWidth(msg)) / 2,
+        B_HEIGHT / 2);
+}
+```
+_Method_ `actionPerformed` menggunakan `ActionEvent` yang merepresentasikan siklus _update game_. Setiap siklus juga mengecek apakah masih dalam permainan atau tidak dengan memanggil _method_ `inGame`. Dalam setiap siklus juga, _sprite_ dalam game akan di-_update_ (posisi) dan dilakukan cek tabrakan dengan _method_ `checkCollission`. 
+```java
+@Override
+public void actionPerformed(ActionEvent e) {
+
+    inGame();
+
+    updateShip();
+    updateMissiles();
+    updateAliens();
+
+    checkCollisions();
+
+    repaint();
+}
+```
+_Method_ `inGame` akan menghentikan `timer` jika sudah tidak dalam _game_ (`ingame` bernilai `false`).
+```java
+private void inGame() {
+
+    if (!ingame) {
+        timer.stop();
+    }
+}
+```
+_Method_ `updateSpaceship` meng-_update_ posisi pesawat dengan _method_ `move` milik `spaceship`.
+```java
+private void updateShip() {
+
+    if (spaceship.isVisible()) {            
+        spaceship.move();
+    }
+}
+```
+_Method_ `updateMissile` meng-_update_ posisi _sprite_ misil dengan `move` atau men-_destroy_ (menghapus dari list misil yang didapat dari `getMissile`) saat `visible` dari misil tersebut bernilai `0`.
+```java
+private void updateMissiles() {
+
+    List<Missile> ms = spaceship.getMissiles();
+
+    for (int i = 0; i < ms.size(); i++) {
+
+        Missile m = ms.get(i);
+
+        if (m.isVisible()) {
+            m.move();
+        } else {
+            ms.remove(i);
+        }
+    }
+}
+```
+_Method_ `updateAliens` melakukan _update_ _sprite_ alien dengan syarat sama seperti pada `updateMissiles` dan juga mengatur `ingame` menjadi `false` (sudah tidak dalam permainan) saat sudah tidak ada alien tersisa (list `aliens` kosong).
+```java
+private void updateAliens() {
+
+    if (aliens.isEmpty()) 
+        
+       ingame = false;
+       return;
+    }
+
+    for (int i = 0; i < aliens.size(); i++) {
+
+        Alien a = aliens.get(i);
+        
+        if (a.isVisible()) {
+            a.move();
+        } else {
+            aliens.remove(i);
+        }
+    }
+}
+```
+_Method_ `checkCollision` mengecek benturan antara Alien - Spaceship dan Missile - Alien dengan cara mengecek batas dari setiap _sprite_ berupa objek `Rectangle` yang didapat dari `getBound` masing-masing _sprite_ yang beririsan (menggunakan _method_ `intersects` yang dimiliki `Rectangle`). 
+
+Jika _bound_ dari Alien dan Spaceship beririsan (pesawat menabrak alien), maka permainan akan berhenti (`ingame` diatur `false`) dan visibilitas keduanya diatur `false`. Jika _bound_ dari Missile dan Alien beririsan (misil mengenai alien), `visible` keduan objek bersangkutan akan diatur `false`.
+
+```java
+Public void checkCollisions() {
+
+    Rectangle r3 = spaceship.getBounds();
+
+    for (Alien alien : aliens) {
+            
+        Rectangle r2 = alien.getBounds();
+
+        if (r3.intersects(r2)) {
+                
+            spaceship.setVisible(false);
+            alien.setVisible(false);
+            ingame = false;
+        }
+    }
+
+    List<Missile> ms = spaceship.getMissiles();
+
+    for (Missile m : ms) {
+
+        Rectangle r1 = m.getBounds();
+
+        for (Alien alien : aliens) {
+
+            Rectangle r2 = alien.getBounds();
+
+            if (r1.intersects(r2)) {
+                    
+                m.setVisible(false);
+                alien.setVisible(false);
+            }
+        }
+    } 
+}
+```
+
+Terakhir adalah kelas ini memiliki kelas lain didalamnya yaitu `TAdapter` untuk mendeteksi input pemain.
+
+## **Kelas `Collissionex`**
+Kelas ini adalah _driver class_ yang akan mengatur _frame_ program dan menambahkan objek _Board_ (yang akan memuulai permainan) saat program dijalankan.
+
+### _Run_ Program
+Saat program dijalankan akan tampak seperti gamber berikut ini.
+
+![Tampilan program dengan latar belakang hitam dan objek-objek game (pesawat, misil, dan alien)](https://github.com/raassh-23/fp-pbo/blob/main/Collision%20Detection/Collision%20Detection.PNG)
