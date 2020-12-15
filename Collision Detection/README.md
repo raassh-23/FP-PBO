@@ -395,7 +395,7 @@ Public void checkCollisions() {
 
 Terakhir adalah kelas ini memiliki kelas lain didalamnya yaitu `TAdapter` untuk mendeteksi input pemain.
 
-## **Kelas `Collissionex`**
+## **Kelas `CollissionEx`**
 Kelas ini adalah _driver class_ yang akan mengatur _frame_ program dan menambahkan objek _Board_ (yang akan memuulai permainan) saat program dijalankan.
 
 ### _Run_ Program
