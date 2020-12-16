@@ -9,8 +9,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +47,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void initBoard() {
 
-        addMouseListener(new TAdapter());
-        addMouseMotionListener(new TAdapter());
+        addKeyListener(new TAdapter());
         setFocusable(true);
         setBackground(Color.BLACK);
         ingame = true;
@@ -226,11 +225,16 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    private class TAdapter extends MouseAdapter {
+    private class TAdapter extends KeyAdapter {
 
         @Override
-        public void mouseMoved(MouseEvent e) {
-            spaceship.mouseMoved(e);
+        public void keyReleased(KeyEvent e) {
+            spaceship.keyReleased(e);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            spaceship.keyPressed(e);
         }
     }
 }
