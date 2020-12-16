@@ -1,5 +1,6 @@
 package id.ac.its.rauf140.daanii163.syamil196.collisiondetection;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +23,9 @@ public class SpaceShip extends Sprite {
         missiles = new ArrayList<>();
         loadImage("src/resources/craft.png");
         getImageDimensions();
-
-        MAX_X = 400 - getWidth();
-        MAX_Y = 300 - getHeight();
+        
+        this.MAX_X = 400 - getWidth();
+        this.MAX_Y = 300 - getHeight();
     }
 
     public void move() {
@@ -39,27 +40,31 @@ public class SpaceShip extends Sprite {
         if (y < 1) {
             y = 1;
         }
-
-        if (x > MAX_X) {
-            x = MAX_X;
-        }
-            
-        if (y > MAX_Y){
-            y = MAX_Y;
-        }
     }
 
     public List<Missile> getMissiles() {
         return missiles;
     }
 
+    public void mouseClicked(MouseEvent e) {
+    	fire();
+    	
+    }
+    
+    public void mouseDragged(MouseEvent e) {
+    	fire();
+    	mouseMoved(e);
+    }
+    
+    public void mouseMoved(MouseEvent e) {
+    	if(e.getX() < MAX_X) dx = e.getX();
+    	if(e.getY() < MAX_Y)dy = e.getY();
+    }
+
+
     public void fire() {
         missiles.add(new Missile(x + width, y + height / 2));
     }
 
-    public void mouseMoved(MouseEvent e) {
-    	dx = e.getX();
-    	dy = e.getY();
-    }
 }
 
