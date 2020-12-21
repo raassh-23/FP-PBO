@@ -2,6 +2,8 @@
 
 Perubahan kontrol dari menggunakan _keyboard_ menjadi _mouse_ berarti melakukan perubahan pada kelas _sprite_ yang dapat dikontrol yaitu `SpaceShip` dan kelas dimana input kontrol dideteksi `Board`.
 
+![Diagram Kelas Proyek Collision Detection with Mouse Handling](https://github.com/raassh-23/fp-pbo/blob/main/Collision%20Detection%20with%20Mouse%20Handling/Diagram%20Collision%20Detection%20With%20Mouse%20Handling.jpg)
+
 ## **Perubahan pada `SpaceShip`**
 
 Pada `SpaceShip` terdapat _method_ `keyPressed` dan  `keyReleased` untuk mengatur kontrol dengan _keyboard_ (dipanggil saat _key_ ditekan dan dilepas). Karena kontrol ingin diganti dengan _mouse_, maka _method_-_method_ tersebut dihapus. 
@@ -31,11 +33,10 @@ Akan tetapi dengan perintah yang demikian, _sprite_ pesawat akan mengikuti gerak
 
 Pembatasan dilakukan dengan mengecek posisi _mouse_ apakah sudah diluar _board_ atau tidak. Jika posisi _mouse_ diluar _board_, maka posisi pesawat tidak perlu di-_update_ untuk sama dengan posisi _mouse_.
 
-Untuk mengetahui batas posisi pesawat ditambahkan atribut `MAX_X` dan `MAX_Y` yang merupakan batas posisi maksimal pesawat. Nilai `MAX_X` adalah lebar _board_ (400) dikurangi lebar _sprite_ pesawat. Nilai `MAX_Y` adalah tinggi _board_ (300)dikurangi tinggi _sprite_ pesawat.
+Untuk mengetahui batas posisi pesawat ditambahkan atribut `MAX_X` dan `MAX_Y` yang merupakan batas posisi maksimal pesawat. Nilai `MAX_X` adalah lebar _board_ (400) dikurangi lebar _sprite_ pesawat. Nilai `MAX_Y` adalah tinggi _board_ (300) dikurangi tinggi _sprite_ pesawat. Tinggi dan lebar _sprite_ pesawat didapat dari _method_ `getWidth` dan `getHeight` yang juga baru ditambahkan pada _parent class_ `Sprite`.
 
 ```java
-private void initCraft() {
-        
+private void initCraft() {       
 ...
     this.MAX_X = 400 - getWidth();
     this.MAX_Y = 300 - getHeight();
@@ -106,4 +107,4 @@ private void initBoard() {
 ...
 }
 ```
-Dengan begitu pemain sudah dapat mengontrol pesawat mengunakan _mouse_.
+Dengan begitu pemain sudah dapat mengontrol pesawat mengunakan _mouse_. Demonstrasi perubahan yang dilakukan dapat dilihat pada [video YouTube](https://youtu.be/3-V5fhFRPA4).
