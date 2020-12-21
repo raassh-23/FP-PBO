@@ -31,7 +31,7 @@ Akan tetapi dengan perintah yang demikian, _sprite_ pesawat akan mengikuti gerak
 
 Pembatasan dilakukan dengan mengecek posisi _mouse_ apakah sudah diluar _board_ atau tidak. Jika posisi _mouse_ diluar _board_, maka posisi pesawat tidak perlu di-_update_ untuk sama dengan posisi _mouse_.
 
-Untuk mengetahui batas posisi pesawat ditambahkan atribut `MAX_X` dan `MAX_Y` yang merupakan batas posisi maksimal pesawat. Nilai `MAX_X` adalah lebar _board_ (400)dikurangi lebar _sprite_ pesawat. Nilai `MAX_Y` adalah tinggi _board_ (300)dikurangi tinggi _sprite_ pesawat.
+Untuk mengetahui batas posisi pesawat ditambahkan atribut `MAX_X` dan `MAX_Y` yang merupakan batas posisi maksimal pesawat. Nilai `MAX_X` adalah lebar _board_ (400) dikurangi lebar _sprite_ pesawat. Nilai `MAX_Y` adalah tinggi _board_ (300)dikurangi tinggi _sprite_ pesawat.
 
 ```java
 private void initCraft() {
