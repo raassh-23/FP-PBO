@@ -1,6 +1,5 @@
 package id.ac.its.rauf140.daanii163.syamil196.collisiondetection;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class SpaceShip extends Sprite {
     
     public void mouseMoved(MouseEvent e) {
     	if(e.getX() < MAX_X) dx = e.getX();
-    	if(e.getY() < MAX_Y)dy = e.getY();
+    	if(e.getY() < MAX_Y) dy = e.getY();
     }
 
 
