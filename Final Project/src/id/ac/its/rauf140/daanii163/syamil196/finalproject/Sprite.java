@@ -1,20 +1,14 @@
-package id.ac.its.rauf140.daanii163.syamil196.collisiondetection;
+package id.ac.its.rauf140.daanii163.syamil196.finalproject;
 
 import java.awt.Image;
-import java.awt.Rectangle;
-
-import javax.swing.ImageIcon;
 
 public class Sprite {
-    protected int x;
-    protected int y;
-    protected int width;
-    protected int height;
+    protected int x, y;
+    protected int width, height;
     protected boolean visible;
     protected Image image;
 
     public Sprite(int x, int y) {
-
         this.x = x;
         this.y = y;
         visible = true;
@@ -25,7 +19,7 @@ public class Sprite {
         width = image.getWidth(null);
         height = image.getHeight(null);
     }
-    
+
     protected void loadImage(String imageName) {
 
         ImageIcon ii = new ImageIcon(imageName);
@@ -36,6 +30,14 @@ public class Sprite {
         return image;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
     public int getX() {
         return x;
     }
