@@ -10,7 +10,4 @@ Dalam setiap level, pemain akan dihadapkan dengan batasan waktu tertentu. Pemain
 Permen yang dijatuhkan akan bervariasi. Variasi permen akan menentukan variasi skor yang akan didapat pemain jika menangkapnya.
 
 ### Skor
-Setiap akhir level pemain dapat melihat highscore sehingga pemain bisa mengalahkan rekor skornya sendiri dengan memulai ulang level
-
-### Diagram Kelas
-!(Diagram Kelas)[https://github.com/raassh-23/fp-pbo/blob/main/Final%20Project/Class%20Diagram%20Final%20Project.mdj]
+Setiap akhir level pemain dapat melihat highscore sehingga pemain bisa mengalahkan rekor skornya sendiri dengan memulai ulang level.
