@@ -12,6 +12,6 @@ public class BadCandy extends Candy{
 
         this.MAX_Y = 300 - getHeight();
 
-        addToScore = 0;
+        addToScore = -1;
     }
 }

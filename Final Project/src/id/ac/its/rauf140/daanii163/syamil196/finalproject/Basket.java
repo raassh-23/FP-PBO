@@ -1,5 +1,6 @@
 package id.ac.its.rauf140.daanii163.syamil196.finalproject;
 
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 public class Basket extends Sprite {
@@ -54,6 +55,16 @@ public class Basket extends Sprite {
     	dy = e.getY();
     }
 
+    public int checkCollisionWithCandy(Candy candy) {
+        Rectangle b = this.getBounds();
+        Rectangle c = candy.getBounds();
 
+        if(b.intersects(c)) {
+            candy.setVisible(false);
+            return candy.addToScore;
+        }
+
+        return 0;
+    }
 }
 
