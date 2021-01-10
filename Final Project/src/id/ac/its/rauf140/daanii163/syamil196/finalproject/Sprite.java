@@ -1,8 +1,11 @@
 package id.ac.its.rauf140.daanii163.syamil196.finalproject;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 
-public class Sprite {
+import javax.swing.ImageIcon;
+
+public abstract class Sprite {
     protected int x, y;
     protected int width, height;
     protected boolean visible;
@@ -57,4 +60,6 @@ public class Sprite {
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
+
+    public abstract void move();
 }

@@ -1,26 +1,22 @@
 package id.ac.its.rauf140.daanii163.syamil196.finalproject;
 
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Basket extends Sprite {
     private int dx;
     private int dy;
     private int MAX_X;
     private int MAX_Y;
-    private List<Missile> missiles;
 
     public Basket(int x, int y) {
         super(x, y);
 
-        initCraft();
+        initBasket();
     }
 
-    private void initCraft() {
+    private void initBasket() {
         
-        missiles = new ArrayList<>();
-        loadImage("src/resources/craft.png");
+        loadImage("src/resources/basket.png");
         getImageDimensions();
         
         this.MAX_X = 400 - getWidth();
@@ -36,34 +32,28 @@ public class Basket extends Sprite {
             x = 1;
         }
 
+        if (x > MAX_X) {
+            x = MAX_X;
+        }
+
         if (y < 1) {
             y = 1;
         }
-    }
 
-    public List<Missile> getMissiles() {
-        return missiles;
-    }
-
-    public void mouseClicked(MouseEvent e) {
-    	fire();
-    	
+        if (y > MAX_Y) {
+            y = MAX_Y;
+        }
     }
     
     public void mouseDragged(MouseEvent e) {
-    	fire();
     	mouseMoved(e);
     }
     
     public void mouseMoved(MouseEvent e) {
-    	if(e.getX() < MAX_X) dx = e.getX();
-    	if(e.getY() < MAX_Y) dy = e.getY();
+    	dx = e.getX();
+    	dy = e.getY();
     }
 
-
-    public void fire() {
-        missiles.add(new Missile(x + width, y + height / 2));
-    }
 
 }
 
