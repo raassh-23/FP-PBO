@@ -8,7 +8,7 @@ public class Candy3 extends Candy {
 
     @Override
     protected void initCandy() {
-        loadImage("src/resources/candy2.png");
+        loadImage("src/resources/candy3.png");
         getImageDimensions();
 
         this.MAX_Y = 300 - getHeight();
