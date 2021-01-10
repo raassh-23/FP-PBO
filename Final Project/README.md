@@ -11,3 +11,8 @@ Permen yang dijatuhkan akan bervariasi. Variasi permen akan menentukan variasi s
 
 ### Skor
 Setiap akhir level pemain dapat melihat highscore sehingga pemain bisa mengalahkan rekor skornya sendiri dengan memulai ulang level.
+
+### Referensi
+1. http://zetcode.com/javagames/collision/
+2. http://zetcode.com/javagames/puzzle/
+3. http://forum.codecall.net/topic/50071-making-a-simple-high-score-system/
