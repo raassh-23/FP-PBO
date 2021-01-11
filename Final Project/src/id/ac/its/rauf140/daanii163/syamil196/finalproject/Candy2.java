@@ -11,7 +11,7 @@ public class Candy2 extends Candy {
         loadImage("src/resources/candy2.png");
         getImageDimensions();
 
-        this.MAX_Y = 300 - getHeight();
+        this.MAX_Y = 700 - getHeight();
 
         addToScore = 15;
     }

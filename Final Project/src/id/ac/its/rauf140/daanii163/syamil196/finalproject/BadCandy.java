@@ -7,10 +7,10 @@ public class BadCandy extends Candy{
 
     @Override
     protected void initCandy() {
-        loadImage("src/resources/badCandy.png");
+        loadImage("src/resources/badcandy.png");
         getImageDimensions();
 
-        this.MAX_Y = 300 - getHeight();
+        this.MAX_Y = 700 - getHeight();
 
         addToScore = -1;
     }

@@ -13,11 +13,6 @@ public abstract class Candy extends Sprite {
 
     @Override
     public void move() {
-
-        if (y > MAX_Y) {
-            y = INITIAL_Y;
-        }
-
         y += 1;
     }
 

@@ -21,7 +21,7 @@ public class Basket extends Sprite {
         getImageDimensions();
         
         this.MAX_X = 400 - getWidth();
-        this.MAX_Y = 300 - getHeight();
+        this.MAX_Y = 700 - getHeight();
     }
 
     public void move() {
@@ -37,13 +37,14 @@ public class Basket extends Sprite {
             x = MAX_X;
         }
 
-        if (y < 1) {
-            y = 1;
+        if (y < MAX_Y) {
+            y = MAX_Y;
         }
 
         if (y > MAX_Y) {
             y = MAX_Y;
         }
+        
     }
     
     public void mouseDragged(MouseEvent e) {
@@ -59,7 +60,7 @@ public class Basket extends Sprite {
         Rectangle b = this.getBounds();
         Rectangle c = candy.getBounds();
 
-        if(b.intersects(c)) {
+        if(b.intersects(c) && candy.isVisible()) {
             candy.setVisible(false);
             return candy.addToScore;
         }
