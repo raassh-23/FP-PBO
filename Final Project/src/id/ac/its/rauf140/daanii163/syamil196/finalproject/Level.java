@@ -11,11 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -24,6 +28,7 @@ public class Level extends JPanel implements ActionListener {
     private Timer timer;
     private Basket basket;
     private HighscoreManager hm;
+    private String playerName;
     private Image bg;
     private List<Candy> candies;
     private boolean ingame;
@@ -53,6 +58,7 @@ public class Level extends JPanel implements ActionListener {
         setBackground(Color.BLACK);
         hm = new HighscoreManager("highscoreTest.ser");
         bg = new ImageIcon("src/resources/lv_bg.png").getImage();
+        playerName = "";
         ingame = true;
         candyCount = 0;
         score = 0;
@@ -84,7 +90,7 @@ public class Level extends JPanel implements ActionListener {
         if (ingame) {
         	g.drawImage(bg, 0, 0, this);
             drawObjects(g);
-        } else {      	
+        } else { 
             drawGameOver(g);
         }
 
@@ -103,34 +109,43 @@ public class Level extends JPanel implements ActionListener {
                 g.drawImage(candy.getImage(), candy.getX(), candy.getY(), this);
             }
         }
-
+        
         g.setColor(Color.BLACK);
         g.drawString("Lives: " + lives, 5, 15);
         g.drawString("Score: " + score, 5, 35);
     }
 
-    private void drawGameOver(Graphics g) {
-    	
-        String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
-        int iScoreY = 400, iScoreX, tabWidth = 10;
-        FontMetrics fm = getFontMetrics(small);
-
+    private void drawGameOver(Graphics g) {   	
+        
+        int scoreY, scoreX, titleY, tabWidth = 10;
+        String title = "You're A Failure";
+        
+        
+        Font fontTitle = new Font("Helvetica", Font.BOLD, 36);
+        FontMetrics fmTitle = getFontMetrics(fontTitle);
+        Font fontScore = new Font("Helvetica", Font.BOLD, 18);
+        FontMetrics fmScore = getFontMetrics(fontScore);
+        
         g.setColor(Color.white);
-        g.setFont(small);
-        g.drawString(msg, (B_WIDTH - fm.stringWidth(msg)) / 2,
-                B_HEIGHT / 2);
-
-        hm.addScore("Pemain", score);
+        
+        titleY = (B_HEIGHT - fmTitle.getHeight() - 20 - 5 * fmScore.getHeight()) / 2;
+        g.setFont(fontTitle);
+        g.drawString(title, (B_WIDTH - fmTitle.stringWidth(title)) / 2, titleY);
+        
+        scoreY = titleY + 20 + fmTitle.getHeight();
+        g.setFont(fontScore);
 
         for (String line : hm.getHighscoreString().split("\n")) {
-        	iScoreX = (B_WIDTH - fm.stringWidth(line) - 2 * tabWidth) / 2;
+        	scoreX = (B_WIDTH - fmScore.stringWidth(line) - 2 * tabWidth) / 2;
         	for (String word : line.split("\t")) {       		
-        		g.drawString(word, iScoreX, iScoreY);
-        		iScoreX += tabWidth + fm.stringWidth(word);
+        		g.drawString(word, scoreX, scoreY);
+        		scoreX += tabWidth + fmScore.stringWidth(word);
         	}
-        	iScoreY += fm.getHeight();        	
+        	scoreY += fmScore.getHeight();        	
     	}
+        
+//        JButton jb = new JButton("test");
+//        this.add(jb);
     }
 
     @Override
@@ -150,6 +165,9 @@ public class Level extends JPanel implements ActionListener {
 
         if (!ingame) {
             timer.stop();
+
+            playerName = JOptionPane.showInputDialog("Enter name", "Player");
+            hm.addScore(playerName, score);
         }
     }
 

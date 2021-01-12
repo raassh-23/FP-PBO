@@ -18,7 +18,7 @@ public class Test extends JFrame{
         setResizable(false);
         pack();
         
-        setTitle("Collision");
+        setTitle("Candy Catch");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

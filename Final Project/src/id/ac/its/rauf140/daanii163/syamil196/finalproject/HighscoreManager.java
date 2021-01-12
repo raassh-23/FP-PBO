@@ -52,6 +52,7 @@ public class HighscoreManager {
 
     public void addScore(String name, int score) {
         loadScoreFile();
+        if (name == null) name = "Player";
         highscores.add(new Score(name, score));
         updateScoreFile();
     }
