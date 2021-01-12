@@ -1,1 +1,2 @@
-*.mdj linguist-vendored
+*.mdj -linguist-vendored
+Final Project/Class Diagram Final Project.mdj -linguist-vendored
