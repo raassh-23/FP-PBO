@@ -17,27 +17,29 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class Level extends JPanel implements ActionListener {
     private Timer timer;
     private Basket basket;
+    private HighscoreManager hm;
     private Image bg;
     private List<Candy> candies;
     private boolean ingame;
     private int candyCount;
-    private Random randX;
-    private final int ICRAFT_X = 200;
-    private final int ICRAFT_Y = 675;
+    private final int IBASKET_X = 200;
+    private final int IBASKET_Y = 675;
     private final int B_WIDTH = 400;
     private final int B_HEIGHT = 700;
     private final int DELAY = 15;
+    private final int LIVES_TOTAL = 0;
     private int lives;
     private int score;
 
     private final int[] pos = {
-    		0, 100, 200, 300, 400,
-    		500, 600, 700};
+    		650, 550, 450, 350, 250,
+    		150, 50};
     
     public Level() {
     	initBoard();
@@ -48,16 +50,17 @@ public class Level extends JPanel implements ActionListener {
         addMouseListener(new TAdapter());
         addMouseMotionListener(new TAdapter());
         setFocusable(true);
+        setBackground(Color.BLACK);
+        hm = new HighscoreManager("highscoreTest.ser");
         bg = new ImageIcon("src/resources/lv_bg.png").getImage();
         ingame = true;
-        candyCount = 4;
+        candyCount = 0;
         score = 0;
-        lives = 5;
+        lives = LIVES_TOTAL;
 
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
 
-        basket = new Basket(ICRAFT_X, ICRAFT_Y);
-        randX = new Random();
+        basket = new Basket(IBASKET_X, IBASKET_Y);
 
         initCandies();
 
@@ -78,14 +81,10 @@ public class Level extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        g.drawImage(bg, 0, 0, this);
-        
         if (ingame) {
-
+        	g.drawImage(bg, 0, 0, this);
             drawObjects(g);
-
-        } else {
-
+        } else {      	
             drawGameOver(g);
         }
 
@@ -107,20 +106,31 @@ public class Level extends JPanel implements ActionListener {
 
         g.setColor(Color.BLACK);
         g.drawString("Lives: " + lives, 5, 15);
-        g.drawString("Score: " + score, 200, 15);
-        g.drawString("Candy: " + candyCount, 5, 35);
+        g.drawString("Score: " + score, 5, 35);
     }
 
     private void drawGameOver(Graphics g) {
-
+    	
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 14);
+        int iScoreY = 400, iScoreX, tabWidth = 10;
         FontMetrics fm = getFontMetrics(small);
 
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - fm.stringWidth(msg)) / 2,
                 B_HEIGHT / 2);
+
+        hm.addScore("Pemain", score);
+
+        for (String line : hm.getHighscoreString().split("\n")) {
+        	iScoreX = (B_WIDTH - fm.stringWidth(line) - 2 * tabWidth) / 2;
+        	for (String word : line.split("\t")) {       		
+        		g.drawString(word, iScoreX, iScoreY);
+        		iScoreX += tabWidth + fm.stringWidth(word);
+        	}
+        	iScoreY += fm.getHeight();        	
+    	}
     }
 
     @Override
@@ -164,7 +174,7 @@ public class Level extends JPanel implements ActionListener {
         		if (c.isVisible()) {
             		c.move();
             	} else {
-            		candies.add(newCandy(0));
+            		candies.add(newCandy(0 - basket.getHeight()));
             		candies.remove(i);
             	}
         	}
@@ -173,10 +183,11 @@ public class Level extends JPanel implements ActionListener {
 
     private Candy newCandy(int posY) {
     	candyCount++;
-        if (candyCount % 5 == 0) return new Candy2(randX.nextInt(400), posY);
-        else if (candyCount % 7 == 0) return new BadCandy(randX.nextInt(400), posY);
-        else if (candyCount % 11 == 0) return new Candy3(randX.nextInt(400), posY);
-        else return new Candy1(randX.nextInt(400), posY);      
+    	Random randX = new Random();
+        if (candyCount % 5 == 0) return new Candy2(randX.nextInt(B_WIDTH), posY);
+        else if (candyCount % 1 == 0) return new BadCandy(randX.nextInt(B_WIDTH), posY);
+        else if (candyCount % 11 == 0) return new Candy3(randX.nextInt(B_WIDTH), posY);
+        else return new Candy1(randX.nextInt(B_WIDTH), posY);      
     };
 
 
