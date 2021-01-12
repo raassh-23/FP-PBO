@@ -33,7 +33,7 @@ public class Level extends JPanel implements ActionListener {
     private final int B_WIDTH = 400;
     private final int B_HEIGHT = 700;
     private final int DELAY = 15;
-    private final int LIVES_TOTAL = 0;
+    private final int LIVES_TOTAL = 5;
     private int lives;
     private int score;
 
@@ -185,7 +185,7 @@ public class Level extends JPanel implements ActionListener {
     	candyCount++;
     	Random randX = new Random();
         if (candyCount % 5 == 0) return new Candy2(randX.nextInt(B_WIDTH), posY);
-        else if (candyCount % 1 == 0) return new BadCandy(randX.nextInt(B_WIDTH), posY);
+        else if (candyCount % 7 == 0) return new BadCandy(randX.nextInt(B_WIDTH), posY);
         else if (candyCount % 11 == 0) return new Candy3(randX.nextInt(B_WIDTH), posY);
         else return new Candy1(randX.nextInt(B_WIDTH), posY);      
     };
