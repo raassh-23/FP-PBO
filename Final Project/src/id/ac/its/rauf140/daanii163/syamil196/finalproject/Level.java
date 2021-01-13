@@ -34,7 +34,7 @@ public class Level extends JPanel implements ActionListener {
     private boolean ingame;
     private int candyCount;
     private final int IBASKET_X = 200;
-    private final int IBASKET_Y = 675;
+    private final int IBASKET_Y = 663;
     private final int B_WIDTH = 400;
     private final int B_HEIGHT = 700;
     private final int DELAY = 15;
@@ -201,11 +201,12 @@ public class Level extends JPanel implements ActionListener {
 
     private Candy newCandy(int posY) {
     	candyCount++;
-    	Random randX = new Random();
-        if (candyCount % 5 == 0) return new Candy2(randX.nextInt(B_WIDTH), posY);
-        else if (candyCount % 7 == 0) return new BadCandy(randX.nextInt(B_WIDTH), posY);
-        else if (candyCount % 11 == 0) return new Candy3(randX.nextInt(B_WIDTH), posY);
-        else return new Candy1(randX.nextInt(B_WIDTH), posY);      
+        Random randX = new Random();
+
+        if (candyCount % 5 == 0) return new Candy2(randX.nextInt(B_WIDTH - 36), posY);
+        else if (candyCount % 7 == 0) return new BadCandy(randX.nextInt(B_WIDTH - 36), posY);
+        else if (candyCount % 11 == 0) return new Candy3(randX.nextInt(B_WIDTH - 36), posY);
+        else return new Candy1(randX.nextInt(B_WIDTH - 36), posY);      
     };
 
 

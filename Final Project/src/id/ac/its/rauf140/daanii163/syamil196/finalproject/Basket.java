@@ -5,9 +5,7 @@ import java.awt.event.MouseEvent;
 
 public class Basket extends Sprite {
     private int dx;
-    private int dy;
     private int MAX_X;
-    private int MAX_Y;
 
     public Basket(int x, int y) {
         super(x, y);
@@ -21,13 +19,12 @@ public class Basket extends Sprite {
         getImageDimensions();
         
         this.MAX_X = 400 - getWidth();
-        this.MAX_Y = 700 - getHeight();
+
     }
 
     public void move() {
 
-        x = dx;
-        y = dy;
+        x = dx - getWidth()/2;
 
         if (x < 1) {
             x = 1;
@@ -35,14 +32,6 @@ public class Basket extends Sprite {
 
         if (x > MAX_X) {
             x = MAX_X;
-        }
-
-        if (y < MAX_Y) {
-            y = MAX_Y;
-        }
-
-        if (y > MAX_Y) {
-            y = MAX_Y;
         }
         
     }
@@ -53,7 +42,6 @@ public class Basket extends Sprite {
     
     public void mouseMoved(MouseEvent e) {
     	dx = e.getX();
-    	dy = e.getY();
     }
 
     public int checkCollisionWithCandy(Candy candy) {
