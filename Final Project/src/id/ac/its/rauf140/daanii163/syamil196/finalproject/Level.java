@@ -178,8 +178,10 @@ public class Level extends JPanel implements ActionListener {
         if (!ingame) {
             timer.stop();
 
-            playerName = JOptionPane.showInputDialog("Enter name", "Player");
-            hm.addScore(playerName, score);
+            if(hm.isHighscore(score)) {
+                playerName = JOptionPane.showInputDialog("Enter name", "Player");
+                hm.addScore(playerName, score);
+            }
         }
     }
 
@@ -225,9 +227,10 @@ public class Level extends JPanel implements ActionListener {
     public void checkCollisions() {
         for (Candy c : candies) {
             int scoreUpdate = basket.checkCollisionWithCandy(c);
-            score += scoreUpdate;
             
             if (scoreUpdate == -1) lives--;
+            else score += scoreUpdate;
+
             if (lives <= 0) {
                 ingame = false;
                 break;
