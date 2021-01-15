@@ -13,6 +13,7 @@ import java.util.Comparator;
 public class HighscoreManager {
     private ArrayList<Score> highscores;
     private String HIGHSCORE_FILE;
+    private final int MAX = 5;
 
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
@@ -50,9 +51,20 @@ public class HighscoreManager {
         });
     }
 
+    public boolean isHighscore(int score1) {
+        for (int i = 0; i < MAX; i++) {
+            int score2 = highscores.get(i).getScore();
+            if (score1 > score2)
+                return true;
+        }
+
+        return false;
+    }
+
     public void addScore(String name, int score) {
         loadScoreFile();
-        if (name == null) name = "Player";
+        if (name == null)
+            name = "Player";
         highscores.add(new Score(name, score));
         updateScoreFile();
     }
@@ -101,15 +113,14 @@ public class HighscoreManager {
 
     public String getHighscoreString() {
         String highscoreString = "";
-        int max = 5;
 
         ArrayList<Score> scores;
         scores = getScores();
 
         int i = 0;
         int x = scores.size();
-        if (x > max) {
-            x = max;
+        if (x > MAX) {
+            x = MAX;
         }
         while (i < x) {
             highscoreString += (i + 1) + ".\t" + scores.get(i).getName() + "\t" + scores.get(i).getScore() + "\n";

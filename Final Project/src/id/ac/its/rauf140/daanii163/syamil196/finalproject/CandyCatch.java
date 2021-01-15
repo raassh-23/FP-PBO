@@ -1,12 +1,16 @@
 package id.ac.its.rauf140.daanii163.syamil196.finalproject;
 
+import java.awt.CardLayout;
 import java.awt.EventQueue;
-import java.util.Scanner;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class CandyCatch extends JFrame{
     public static final int WIDTH = 400;
     public static final int HEIGHT = 700;
+    public static CardLayout cardLayout;
+    public static JPanel mainPanel;
 
     public CandyCatch() {
         
@@ -14,8 +18,14 @@ public class CandyCatch extends JFrame{
     }
     
     private void initUI() {
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+
+        mainPanel.add(new MainMenu(), "title");
+        mainPanel.add(new LevelSelect(), "level");
+        mainPanel.add(new CreditPage(), "credit");
         
-        add(new LevelHard());
+        add(mainPanel);
         
         setResizable(false);
         pack();
@@ -31,21 +41,4 @@ public class CandyCatch extends JFrame{
             ex.setVisible(true);
         });
     }
-
-//     public static void main(String[] args) {
-//         HighscoreManager hm = new HighscoreManager("highscoreTest.ser");
-//
-//         Scanner scanner = new Scanner(System.in);
-//
-//         System.out.print(hm.getHighscoreString());
-//
-//         while (scanner.hasNextLine()) {
-//             String name = scanner.nextLine();
-//             int score = Integer.parseInt(scanner.nextLine());
-//
-//             hm.addScore(name, score);
-//             System.out.print(hm.getHighscoreString());
-//        
-//         }
-//     }
 }

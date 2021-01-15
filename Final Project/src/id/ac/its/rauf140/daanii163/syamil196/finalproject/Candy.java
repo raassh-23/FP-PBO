@@ -13,7 +13,7 @@ public abstract class Candy extends Sprite {
 
     @Override
     public void move() {
-        y += 1;
+        y += 2;
     }
 
     protected abstract void initCandy(); 
