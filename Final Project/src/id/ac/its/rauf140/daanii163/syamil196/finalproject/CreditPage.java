@@ -28,7 +28,6 @@ public class CreditPage extends Menu {
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.PAGE_END;
         add(backButton, gbc);
     }
 

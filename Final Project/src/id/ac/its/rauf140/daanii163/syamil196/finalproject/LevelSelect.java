@@ -24,6 +24,7 @@ public class LevelSelect extends Menu {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                CandyCatch.mainPanel.add(new LevelEasy(), "levelEasy");
                 CandyCatch.cardLayout.show(CandyCatch.mainPanel, "levelEasy");
             }
             
@@ -33,6 +34,7 @@ public class LevelSelect extends Menu {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                CandyCatch.mainPanel.add(new LevelNormal(), "levelNormal");
                 CandyCatch.cardLayout.show(CandyCatch.mainPanel, "levelNormal");
             }
             
@@ -42,6 +44,7 @@ public class LevelSelect extends Menu {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                CandyCatch.mainPanel.add(new LevelHard(), "levelHard");
                 CandyCatch.cardLayout.show(CandyCatch.mainPanel, "levelHard");
             }
             

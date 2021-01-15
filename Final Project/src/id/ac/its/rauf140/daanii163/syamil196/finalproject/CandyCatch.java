@@ -23,9 +23,6 @@ public class CandyCatch extends JFrame{
 
         mainPanel.add(new MainMenu(), "title");
         mainPanel.add(new LevelSelect(), "level");
-        mainPanel.add(new LevelEasy(), "levelEasy");
-        mainPanel.add(new LevelNormal(), "levelNormal");
-        mainPanel.add(new LevelHard(), "levelHard");
         mainPanel.add(new CreditPage(), "credit");
         
         add(mainPanel);

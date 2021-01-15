@@ -5,23 +5,22 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.font.TextAttribute;
-import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class Level extends JPanel implements ActionListener {
@@ -39,16 +38,36 @@ public class Level extends JPanel implements ActionListener {
     protected final int LIVES_TOTAL = 5;
     protected int lives;
     protected int score;
+    protected JButton backButton;
 
     private final int[] pos = {
     		650, 550, 450, 350, 250,
     		150, 50};
     
     public Level() {
-    	initBoard();
+        initBoard();
+        
+        backButton = new JButton("Back");
+        add(backButton);
+        backButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CandyCatch.cardLayout.show(CandyCatch.mainPanel, "title");
+            }
+
+        });
+
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(250,0,0,0);
+        add(backButton, gbc);
+
+        backButton.setVisible(false);
+
 	}
 
-    private void initBoard() {
+    protected void initBoard() {
 
         addMouseListener(new TAdapter());
         addMouseMotionListener(new TAdapter());
@@ -115,7 +134,6 @@ public class Level extends JPanel implements ActionListener {
         int scoreY, scoreX, titleY, tabWidth = 10;
         String title = "You're A Failure";
         
-        
         Font fontTitle = new Font("Helvetica", Font.BOLD, 36);
         FontMetrics fmTitle = getFontMetrics(fontTitle);
         Font fontScore = new Font("Helvetica", Font.BOLD, 18);
@@ -139,8 +157,7 @@ public class Level extends JPanel implements ActionListener {
         	scoreY += fmScore.getHeight();        	
     	}
         
-//        JButton jb = new JButton("test");
-//        this.add(jb);
+        backButton.setVisible(true);
     }
 
     @Override

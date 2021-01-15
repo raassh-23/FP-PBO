@@ -6,7 +6,13 @@ public class LevelNormal extends Level {
 
     public LevelNormal() {
         super();
-        
+    
+    }
+
+    @Override
+    protected void initBoard() {
+        super.initBoard();
+
         hm = new HighscoreManager("highscoreNormal.ser");
         bg = new ImageIcon("src/resources/bgNormal.png").getImage();
         lives = LIVES_TOTAL - 2;
