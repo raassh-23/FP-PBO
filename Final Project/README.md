@@ -170,6 +170,14 @@ public String getHighscoreString() {
    return highscoreString;
 }
 ```
+### Kelas `CandyCatch`
+Kelas `CandyCatch` ini adalah merupakan kelas turunan dari `JFrame` dan juga_driver class_ dari program ini. 
+
+Kelas ini juga mempunyai 2 _constant_, yaitu `HEIGHT` dan `WIDTH` yang merupakan tinggi dan lebar dimensi program. 2 _constant_ ini bersifat `static` sehingga bisa diakses oleh kelas lain tanpa perlu membuat objeknya.
+
+Selain itu, kelas ini juga mempunyai 2 atribut yang bersifat `static`, yaitu `cardLayout` dan `mainPanel` yang nantinya akan digunakan dalam mengatur _frame_.
+
+Selain terdapat `main`, di kelas ini juga terdapat `initUi` yang merupakan hasil modifikasi dari referensi **4** dan berfungsi untuk mengatur frame. `mainPanel` digunakan untuk tempat menambahkan objek _panel_ lain seperti `MainMenu`, `LevelSelect`, dll. `mainPanel` menggunakan _layout manager_ `cardLayout` sehingga dapat memudahkan penggantian panel yang ditampilkan. Perbedaan dengan referensi **4** adalah `mainPanel` dan `cardLayout` bersifat `static` sehingga dapat digunakan tanpa membuat objek baru di kelas lain.
 
 ### Referensi
 1. http://zetcode.com/javagames/collision/
