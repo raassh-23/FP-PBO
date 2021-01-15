@@ -4,16 +4,18 @@ import java.awt.EventQueue;
 import java.util.Scanner;
 import javax.swing.JFrame;
 
-public class Test extends JFrame{
+public class CandyCatch extends JFrame{
+    public static final int WIDTH = 400;
+    public static final int HEIGHT = 700;
 
-    public Test() {
+    public CandyCatch() {
         
         initUI();
     }
     
     private void initUI() {
         
-        add(new Level());
+        add(new LevelHard());
         
         setResizable(false);
         pack();
@@ -25,7 +27,7 @@ public class Test extends JFrame{
     
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-        	Test ex = new Test();
+        	CandyCatch ex = new CandyCatch();
             ex.setVisible(true);
         });
     }

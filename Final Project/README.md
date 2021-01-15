@@ -16,3 +16,4 @@ Setiap akhir level pemain dapat melihat highscore sehingga pemain bisa mengalahk
 1. http://zetcode.com/javagames/collision/
 2. http://zetcode.com/javagames/puzzle/
 3. http://forum.codecall.net/topic/50071-making-a-simple-high-score-system/
+4. https://www.edureka.co/community/38265/switch-jpanels-inside-a-jframe
