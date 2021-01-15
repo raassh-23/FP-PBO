@@ -10,8 +10,6 @@ public class BadCandy extends Candy{
         loadImage("src/resources/badcandy.png");
         getImageDimensions();
 
-        this.MAX_Y = 700 - getHeight();
-
         addToScore = -1;
     }
 }
