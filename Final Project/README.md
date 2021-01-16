@@ -31,6 +31,113 @@ sebesar 7 poin.
 ### Skor
 Setiap akhir level pemain dapat melihat highscore sehingga pemain bisa mengalahkan rekor skornya sendiri dengan memulai ulang level.
 
+### Kelas `Sprite`
+kelas ini adalah modifikasi pada kelas `sprite` pada referensi **1**. kelasi ini memiliki 6 atribut yaitu berupa:
+- `x` , yang bertipe `int`
+- `y` , yang bertipa `int`
+- `width` , yang bertipe `int`
+- `heigth`, yang bertipe `int`
+- `visible` , yang bertipe `boolean`
+- `image`, yang meropaka objek dari `Image`
+
+_Method_  `sprite` merupakan  _public class_  yang berparameter `x` dan `y` pada metode ini nilai `this.x` akan diatur menjadi x, kemudian nilai `this.y` akan diatur menjadi `y` , dan visible akan diubah nilainya menjadi `true`.
+
+```
+    public Sprite(int x, int y) {
+        this.x = x;
+        this.y = y;
+        visible = true;
+    }
+```
+
+_Method_  `getImageDimensions` merupakan  _protected void_  yang berfungsi untuk mengatur ukuran gambar ketika fungsi ini dipanggil.
+
+```
+    protected void getImageDimensions() {
+
+        width = image.getWidth(null);
+        height = image.getHeight(null);
+    }
+````
+
+_Method_  `loadImage` adalah metode yang berfungsi agar menampilkan gambar ketika fugsi ini dipanggil. metode ini berparameter `imageName` yang bertipe data String.
+
+```
+    protected void loadImage(String imageName) {
+
+        ImageIcon ii = new ImageIcon(imageName);
+        image = ii.getImage();
+    }
+```
+
+_Method_  `getImage` merupakan kelas  _public_  yang mewarisi objek `Image` dan akan mengembalikan `image` ketika _method_ ini dipanggil.
+
+```
+    public Image getImage() {
+        return image;
+    }
+```
+
+_Method_  `getWidth` merupakan kelas  _public_  yang bertipe data `int` dan akan mengembalikan `width` ketika _method_ ini dipanggil.
+
+```
+    public int getWidth() {
+        return width;
+    }
+```
+
+_Method_  `getHeight` merupakan kelas  _public_  yang bertipe data `int` dan akan mengembalikan `height` ketika _method_ ini dipanggil.
+
+```
+    public int getHeight() {
+        return height;
+    }
+```
+
+_Method_  `getX` merupakan kelas  _public_  yang bertipe data `int` dan akan mengembalikan `x` ketika _method_ ini dipanggil.
+
+```
+    public int getX() {
+        return x;
+    }
+```
+
+_Method_  `getY` merupakan kelas  _public_  yang bertipe data `int` dan akan mengembalikan `y` ketika _method_ ini dipanggil.
+
+```
+    public int getY() {
+        return y;
+    }
+````
+
+_Method_  `isVisible` merupakan kelas  _public_  yang bertipe data `boolean` dan akan mengembalikan `visible` ketika _method_ ini dipanggil.
+
+```
+    public boolean isVisible() {
+        return visible;
+    }
+```
+_Method_  `setVisible` merupakan kelas  _public_  yang bertipe data `void` dan berparameter `visible` yang bertipe data `Boolean` . metode ini akan mengatur `this.visible` menjadi `visible` ketika metode ini dipanggil.
+
+```
+   public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+```
+_Method_  `getBounds` merupakan  _public class_  yang mewarisi objek `Rectangle`. metode ini akan mengembalkan objek `Rectangle`yang berparameter `x`, `y`, `width`, `height`.
+
+```
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+```
+
+_Method_  `move` ini merupakan  _public abstract class_  yang bertipe data `void`, kelas ini tidak mengembelikan nilai apapun namun dijadikan sebagai metode yang berfungsi ketika kita akan melakukan _mouseHandlingEvent_ .
+
+```
+    public abstract void move();
+```
+
 ### KELAS `Basket`
 Kelas `Basket` merupakan kelas turunan daripada kelas `sprite`yang digunakan untuk menangkap permen ketika program dijalankan. 
 
