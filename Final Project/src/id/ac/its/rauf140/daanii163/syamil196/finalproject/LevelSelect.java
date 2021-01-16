@@ -15,10 +15,10 @@ import javax.swing.JButton;
 public class LevelSelect extends Menu {
 
     public LevelSelect() {
-        JButton easyButton = new JButton("easy");
-        JButton normalButton = new JButton("normal");
-        JButton hardButton = new JButton("hard");
-        JButton backButton = new JButton("back");
+        JButton easyButton = new JButton("Easy");
+        JButton normalButton = new JButton("Normal");
+        JButton hardButton = new JButton("Hard");
+        JButton backButton = new JButton("Back");
 
         easyButton.addActionListener(new ActionListener() {
 

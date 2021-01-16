@@ -9,8 +9,8 @@ public class LevelEasy extends Level {
     }
 
     @Override
-    protected void initBoard() {
-        super.initBoard();
+    protected void initLevel() {
+        super.initLevel();
 
         hm = new HighscoreManager("highscoreEasy.ser");
         bg = new ImageIcon("src/resources/bgEasy.png").getImage();

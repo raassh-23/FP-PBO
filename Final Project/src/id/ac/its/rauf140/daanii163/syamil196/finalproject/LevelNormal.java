@@ -10,8 +10,8 @@ public class LevelNormal extends Level {
     }
 
     @Override
-    protected void initBoard() {
-        super.initBoard();
+    protected void initLevel() {
+        super.initLevel();
 
         hm = new HighscoreManager("highscoreNormal.ser");
         bg = new ImageIcon("src/resources/bgNormal.png").getImage();

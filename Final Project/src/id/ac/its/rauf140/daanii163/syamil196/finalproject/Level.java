@@ -54,8 +54,7 @@ public class Level extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CandyCatch.cardLayout.show(CandyCatch.mainPanel, "title");
-            }
-
+            }   
         });
 
         setLayout(new GridBagLayout());
@@ -64,7 +63,6 @@ public class Level extends JPanel implements ActionListener {
         add(backButton, gbc);
 
         backButton.setVisible(false);
-
 	}
 
     protected void initLevel() {
@@ -124,7 +122,7 @@ public class Level extends JPanel implements ActionListener {
             }
         }
         
-        Font font = new Font("Helvetica", Font.BOLD, 12);
+        Font font = new Font("Helvetica", Font.BOLD, 14);
         g.setFont(font);
         g.setColor(Color.BLACK);
         g.drawString("Lives: " + lives, 5, 15);
@@ -188,11 +186,7 @@ public class Level extends JPanel implements ActionListener {
     }
 
     private void updateBasket() {
-
-        if (basket.isVisible()) {
-            
-            basket.move();
-        }
+        if (basket.isVisible()) basket.move();       
     }
 
     private void updateCandies() {
@@ -224,7 +218,7 @@ public class Level extends JPanel implements ActionListener {
         else if (candyCount % 7 == 0) return new BadCandy(posX, posY);
         else if (candyCount % 11 == 0) return new Candy3(posX, posY);
         else return new Candy1(posX, posY);      
-    };
+    }
 
 
     public void checkCollisions() {
