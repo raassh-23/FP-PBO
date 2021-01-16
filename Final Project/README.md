@@ -34,7 +34,7 @@ sebesar 7 poin.
 Setiap akhir level pemain dapat melihat highscore sehingga pemain bisa mengalahkan rekor skornya sendiri dengan memulai ulang level.
 
 ## **Penjelasan Kelas**
-![Class Diagram Final Project](Class Diagram Final Project.png)
+![Class Diagram Final Project](https://github.com/raassh-23/fp-pbo/blob/main/Final%20Project/Class%20Diagram%20Final%20Project.jpg)
 
 ### **Kelas `Sprite`**
 kelas ini adalah modifikasi pada kelas `sprite` pada referensi **1**. kelasi ini memiliki 6 atribut yaitu berupa:
