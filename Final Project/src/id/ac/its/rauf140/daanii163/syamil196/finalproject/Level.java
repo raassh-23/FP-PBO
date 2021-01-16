@@ -1,4 +1,4 @@
-package id.ac.its.rauf140.daanii163.syamil196.finalproject;
+ package id.ac.its.rauf140.daanii163.syamil196.finalproject;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -45,7 +45,7 @@ public class Level extends JPanel implements ActionListener {
     		150, 50};
     
     public Level() {
-        initBoard();
+        initLevel();
         
         backButton = new JButton("Back");
         add(backButton);
@@ -67,7 +67,7 @@ public class Level extends JPanel implements ActionListener {
 
 	}
 
-    protected void initBoard() {
+    protected void initLevel() {
 
         addMouseListener(new TAdapter());
         addMouseMotionListener(new TAdapter());
@@ -124,6 +124,8 @@ public class Level extends JPanel implements ActionListener {
             }
         }
         
+        Font font = new Font("Helvetica", Font.BOLD, 12);
+        g.setFont(font);
         g.setColor(Color.BLACK);
         g.drawString("Lives: " + lives, 5, 15);
         g.drawString("Score: " + score, 5, 35);
@@ -132,7 +134,7 @@ public class Level extends JPanel implements ActionListener {
     private void drawGameOver(Graphics g) {   	
         
         int scoreY, scoreX, titleY, tabWidth = 10;
-        String title = "You're A Failure";
+        String title = "Game Over";
         
         Font fontTitle = new Font("Helvetica", Font.BOLD, 36);
         FontMetrics fmTitle = getFontMetrics(fontTitle);
@@ -215,12 +217,13 @@ public class Level extends JPanel implements ActionListener {
 
     private Candy newCandy(int posY) {
     	candyCount++;
-        Random randX = new Random();
+        Random rand = new Random();
+        int posX = rand.nextInt(CandyCatch.WIDTH - 36);
 
-        if (candyCount % 5 == 0) return new Candy2(randX.nextInt(CandyCatch.WIDTH - 36), posY);
-        else if (candyCount % 7 == 0) return new BadCandy(randX.nextInt(CandyCatch.WIDTH - 36), posY);
-        else if (candyCount % 11 == 0) return new Candy3(randX.nextInt(CandyCatch.WIDTH - 36), posY);
-        else return new Candy1(randX.nextInt(CandyCatch.WIDTH - 36), posY);      
+        if (candyCount % 5 == 0) return new Candy2(posX, posY);
+        else if (candyCount % 7 == 0) return new BadCandy(posX, posY);
+        else if (candyCount % 11 == 0) return new Candy3(posX, posY);
+        else return new Candy1(posX, posY);      
     };
 
 

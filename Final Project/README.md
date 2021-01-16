@@ -170,8 +170,59 @@ public String getHighscoreString() {
    return highscoreString;
 }
 ```
+
+### Kelas `Level`
+Kelas ini adalah modifikasi dari kelas `Board` pada referensi **1**. Kelas ini merupakan kelas dimana permainan akan dijalankan.
+
+Kelas ini mewarisi `JPanel`. Pada kelas ini terdapat beberapa atribut yaitu:
+1. `timer` yang merupakan objek `Timer` untuk memperbarui kondisi permainan setiap waktu.
+2. `basket` yang merupakan objek `Basket` sebagai keranjang yang dikendalikan pemain untuk menangkap permen.
+3. `hm` yang merupakan objek `HighscoreManager` yang mengatur sistem skor.
+4. `playerName` yang merupakan nama pemain yang perlu diinput pada akhir permainan.
+5. `bg` yang merupakan `Image` sebagai _background_ dari level.
+6. `candies` yang merupakan `List<Candy>` sebagai _collection_ dari permen-permen dalam permainan.
+7. `ingame` sebagai indikator masih dalam permainan atau tidak.
+8. `backButton` yang merupakan tombol kembali pada akhir permainan.
+9. `pos` yang merupakan posisi-posisi permen-permen awal.
+10. `candyCount` untuk menghitung berapa banyak permen yang telah dibuat.
+11. `score` untuk mencatat skor.
+12. `lives` untuk mencatat sisa nyawa.
+
+Terdapat beberapa atribut `final` yaitu `IBASKET_Y`, `IBASKET_X`, `DELAY`, dan `LIVES_TOTAL` yang masing-masingg merupakan posisi awal dari `basket`, _delay_ pada `timer`, dan total nyawa pada level.
+
+Saat kelas dibuat, _constructor_ akan memanggil _method_ `initLevel` serta menginisialisasi `backButton` dan mengatur visibilitasnya menjadi `false` karena akan ditampilkan pada layar _game over_ saja.
+
+_Method_ `initLevel` menambahkan `MouseMotionListener` dan `MouseListener` karena pemain akan mengendalikan keranjang dengan _mouse_. Lalu, _method_ ini menginisialisasi `timer`, `playerName`, `ingame`, `candyCount`, dan`score`. Permen-permen awal juga diinisialisasi dengan memanggil _method_ `initCandies`. Terakhir adalah _setting_ panel.
+
+_Method_ `initCandies` menginisialisasi permen-permen pada `candies` dengan memanggil _method_ `newCandy` yang mengatur `Candy` jenis apa yang harus dibuat dengan posisi-posisi yang ada pada `pos`.
+
+_Method_ `paintComponent` akan menggambar objek-objek dalam permainan. _Method_ ini mengecek kondisi `ingame`. Jika masih dalam permainan (`ingame` = `true`) akan digambar _background_ level dan memanggil _method_ `drawObjects` untk menggambar objek-objek permainan. Jika sudah tidak dalam permainan atau kalah (`ingame` = `false`) maka dipanggil _method_ `drawGameOver` untuk menggambar layar _game over_.
+
+_Method_ `drawObjects` menggambar `basket` dan semua permen dalam `candies` jika masih _visible_. Lalu digambar juga dua String untuk menunjukkan skor dan sisa nyawa.
+
+_Method_ `drawGameOver` menggambar String judul dengan tulisan "Game Over" dan skor tertinggi yang didapat menggunakan HighscoreManager `hm`. Untuk menggambar skor tertinggi, dipanggil _method_ `getHighscore` pada `hm`. Lalu, dipisahkan berdasarkan karakter _newline_ (\n) dan karakter tab (\t) karena _method_ `drawString` tidak bisa menggambarkan karakter tersebut. Setelah dipisahkan, tiap kata pada tiap baris skor digambar satu-persatu.
+
+_Method_ `actionPerformed` dipanggil tiap waktu sesuai `timer`. _Method_ ini memanggil _method_ `inGame`, `updateBasket`, `updateCandies`, `checkCollisions`, dan `repaint`. _Method_ ini memperbarui kondisi permainan.
+
+_Method_ `inGame` mengecek kondisi `ingame` apakah masih berada dalam permainan atau tidak. Jika tidak, `timer` akan diberhentikan dan memunculkan Option Pane untuk mengambil input nama pemain untuk dicatat pada _highscore_.
+
+_Method_ `updateBasket` akan memanggil _method_ `move` pada `basket` untuk menggerakkan keranjang.
+
+_Method_ `updateCandies` akan mengecek setiap objek `Candy` dalam `candies`. Jika posisi permen sudah melewati batas layar bawah, `Candy` tersebut akan dihapus dari `candies` dan dibuat `Candy` baru dengan memanggil _method_ `newCandy` dengan posisi Y = 0. Jika tidak, akan dicek kembali apakah permen tersebut _visible_ atau tidak. Jika iya, permen akan digerakkan dengan _method_ `move` pada `Candy`. Jika tidak, `Candy` tersebut juga akan dihapus dari `candies` dan dibuat `Candy` baru dengan posisi Y = 0 - tinggi `basket`.
+
+_Method_ `newCandy` mengembalikan objek salah satu objek `Candy` yang ditentukan dengan melihat `candyCount`. Jika `candyCount` merupakan kelipatan 5 akan dikembalikan `Candy2`, `BadCandy` jika kelipatan 7, `Candy3` jika kelipatan 11, dan selain itu mengembalikan `Candy1`. `Candy` yang dibuat dengan posisi X _random_ dan posisi Y dari argumen.
+
+_Method_ `checkCollisions` mengecek tabrakan setiap `Candy` dalam `candies` dengan `basket` dengan memanggil _method_ `checkCollisionWithCandy` pada `basket` untuk setiap permen. _Method_ tersebut akan mengembalikan nilai `addToScore` yang digunakan untuk meng-_update_ `score`. Jika `scoreUpdate` sama dengan -1 (bertabrakan dengan `BadCandy`), `lives` akan di-_decrement_. Terakhir adalah mengececk `lives`. Jika `lives` kurang dari sama dengan 0, maka `ingame` akan di-_set_ menjadi `false`.
+
+Terdapat juga _inner class_ `TAdapter` yang mewarisi `MouseAdapter` yang menjadi _event listener_ untuk _mouse_.
+
+### **Kelas `LevelEasy`, `LevelNormal`, dan `LevelHard`**
+Kelas-kelas ini merupakan turunan dari kelas `Level` yang menjadi variasi level. Variasi untuk tiap turunan ini adalah pada _background_ level dan jumlah nyawa (`lives`). Pada `LevelEasy`, `lives` diinisialisasi dengan `TOTAL_LIVES`. Pada `LevelNormal`, `lives` diinisialisasi dengan `TOTAL_LIVES - 2`. Pada `LevelHard`, `lives diinisialisasi dengan `TOTAL_LIVES - 4`.
+
+### **Kelas `Menu`**
+
 ### Kelas `CandyCatch`
-Kelas `CandyCatch` ini adalah merupakan kelas turunan dari `JFrame` dan juga_driver class_ dari program ini. 
+Kelas `CandyCatch` ini adalah merupakan kelas turunan dari `JFrame` dan juga _driver class_ dari program ini. 
 
 Kelas ini juga mempunyai 2 _constant_, yaitu `HEIGHT` dan `WIDTH` yang merupakan tinggi dan lebar dimensi program. 2 _constant_ ini bersifat `static` sehingga bisa diakses oleh kelas lain tanpa perlu membuat objeknya.
 

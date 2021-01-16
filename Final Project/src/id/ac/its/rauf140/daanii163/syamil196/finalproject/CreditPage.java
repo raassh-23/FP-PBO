@@ -46,7 +46,7 @@ public class CreditPage extends Menu {
         FontMetrics fmCredit = getFontMetrics(fontCredit);
 
         String[] credits = { "05111940000140 - Muhammad Nur Abdurrauf", 
-                "05111940000196 - Daanii Nabil Ghinannafsi Kusnanta",
+                "05111940000163 - Daanii Nabil Ghinannafsi Kusnanta",
                 "05111940000196 - Syamil Difaul Haq Sukur" };
 
         int textX = (CandyCatch.WIDTH - fmTitle.stringWidth(title)) / 2;
