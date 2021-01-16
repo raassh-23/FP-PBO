@@ -1,9 +1,9 @@
-# Final Project PBO - Game Candy Catch
+# **Final Project PBO - Game Candy Catch**
 
 ## **Tentang Game**
 
 ### **Deskripsi**
-Game ini merupakan game casual dengan tugas utama pemain adalah untuk menangkap semua permen yang jatuh untuk meraih skor setinggi-tingginya. Pemain juga harus menghindari permen yang beracun. Jika pemain menangkap permen beracun maka nyawa akan berkurang. Jika nyawa sudah habis, maka pemain akan dinyatakan kalah.
+Game ini merupakan _game casual_ dengan tugas utama pemain adalah untuk menangkap semua permen yang jatuh untuk meraih skor setinggi-tingginya. Pemain juga harus menghindari permen yang beracun. Jika pemain menangkap permen beracun maka nyawa akan berkurang. Jika nyawa sudah habis, maka pemain akan dinyatakan kalah.
 
 ### **Variasi Level**
 Dalam setiap level, pemain akan dihadapkan dengan batasan waktu tertentu. Pemain dinyatakan menang jika berhasil menangkap permen sesuai target tiap level. Pemain dinyatakan kalah jika nyawa habis. Terdapat 3 variasi level pada game Candy Catch ini, yaitu:
@@ -26,7 +26,7 @@ sebesar 7 poin.
 
    ![Candy3](src/resources/candy3.png)
    
-4. __Bad Candy__ , jika player menangkap permen ini, maka player akan mengalami penurunan skor sebesar 1 poin.
+4. __Bad Candy__ , jika player menangkap permen ini, maka nyawa player akan berkurang sebanyak 1.
 
    ![BadCandy](src/resources/badcandy.png)	
 
@@ -39,11 +39,11 @@ Setiap akhir level pemain dapat melihat highscore sehingga pemain bisa mengalahk
 ### **Kelas `Sprite`**
 kelas ini adalah modifikasi pada kelas `sprite` pada referensi **1**. kelasi ini memiliki 6 atribut yaitu berupa:
 - `x` , yang bertipe `int`
-- `y` , yang bertipa `int`
+- `y` , yang bertipe `int`
 - `width` , yang bertipe `int`
 - `heigth`, yang bertipe `int`
 - `visible` , yang bertipe `boolean`
-- `image`, yang meropaka objek dari `Image`
+- `image`, yang merupakan objek dari `Image`
 
 _Method_  `sprite` merupakan  _public class_  yang berparameter `x` dan `y` pada metode ini nilai `this.x` akan diatur menjadi x, kemudian nilai `this.y` akan diatur menjadi `y` , dan visible akan diubah nilainya menjadi `true`.
 
@@ -65,7 +65,7 @@ protected void getImageDimensions() {
 }
 ````
 
-_Method_  `loadImage` adalah metode yang berfungsi agar menampilkan gambar ketika fugsi ini dipanggil. metode ini berparameter `imageName` yang bertipe data String.
+_Method_  `loadImage` adalah metode yang berfungsi agar menampilkan gambar ketika fungsi ini dipanggil. metode ini berparameter `imageName` yang bertipe data String.
 
 ```java
 protected void loadImage(String imageName) {
@@ -129,7 +129,7 @@ public void setVisible(Boolean visible) {
    this.visible = visible;
 }
 ```
-_Method_  `getBounds` merupakan  _public class_  yang mewarisi objek `Rectangle`. metode ini akan mengembalkan objek `Rectangle`yang berparameter `x`, `y`, `width`, `height`.
+_Method_  `getBounds` merupakan  _public class_  yang mewarisi objek `Rectangle`. metode ini akan mengembalikan objek `Rectangle` yang berparameter `x`, `y`, `width`, `height`.
 
 ``` java
 public Rectangle getBounds() {
@@ -137,16 +137,16 @@ public Rectangle getBounds() {
 }
 ```
 
-_Method_  `move` ini merupakan  _public abstract class_  yang bertipe data `void`, kelas ini tidak mengembelikan nilai apapun namun dijadikan sebagai metode yang berfungsi ketika kita akan melakukan _mouseHandlingEvent_ .
+_Method_  `move` ini merupakan  _public abstract class_  yang bertipe data `void`, kelas ini tidak mengembalikan nilai apapun namun dijadikan sebagai metode yang berfungsi ketika kita akan melakukan _mouseHandlingEvent_ .
 
 ```java
 public abstract void move();
 ```
 
 ### **Kelas `Basket`**
-Kelas `Basket` merupakan kelas turunan daripada kelas `sprite`yang digunakan untuk menangkap permen ketika program dijalankan. 
+Kelas `Basket` merupakan kelas turunan daripada kelas `sprite` yang digunakan untuk menangkap permen ketika program dijalankan. 
 
-kelas ini memiliki dua atribut bertipe `private` yaitu `dx` dan `MAX_X` yang digunakan sebagai menyimpan titik koordinat ketika keranang digerakan.
+kelas ini memiliki dua atribut bertipe `private` yaitu `dx` dan `MAX_X` yang digunakan sebagai menyimpan titik koordinat ketika keranjang digerakkan.
 
 _method_  `initBasket`  adalah  _Private method_  yang memanggil  `lodImage` dan`getImageDimensions` untuk menampilkan gambar pada object `basket` ketika program dijalankan.
 
@@ -176,7 +176,7 @@ _method_  `initBasket`  adalah  _Private method_  yang memanggil  `lodImage` dan
         }   
 ```
 
-`mouseDragged` merupakan _public class_ beripe `void` yang berparameter `MouseEvent e` , terjadi ketika pengguna menekan tombol mouse dan menggerakannya, kelas ini akan memanggil _method_ `mouseMoved` agar dapat memberikan koordinat dimana mouse berada.
+`mouseDragged` merupakan _public class_ bertipe `void` yang berparameter `MouseEvent e` , terjadi ketika pengguna menekan tombol mouse dan menggerakkannya, kelas ini akan memanggil _method_ `mouseMoved` agar dapat memberikan koordinat dimana mouse berada.
 
 ```
     public void mouseDragged(MouseEvent e) {
@@ -184,7 +184,7 @@ _method_  `initBasket`  adalah  _Private method_  yang memanggil  `lodImage` dan
     }
 ```
 
-`mouseMoved` adalah _public class_ yang berparameter bertipe `void` `MouseEvent e` , terjadi ketika pengguna menggerakan mouse, dan pada kelas ini nilai `dx` akan diatur sama dengan `e.getX()` yang berfungsi sebagai titik koordinat ketika program dijalankan.
+`mouseMoved` adalah _public class_ yang berparameter bertipe `void` `MouseEvent e` , terjadi ketika pengguna menggerakkan mouse, dan pada kelas ini nilai `dx` akan diatur sama dengan `e.getX()` yang berfungsi sebagai titik koordinat ketika program dijalankan.
 
 ```
     public void mouseMoved(MouseEvent e) {
@@ -368,7 +368,7 @@ Kelas ini mewarisi `JPanel`. Pada kelas ini terdapat beberapa atribut yaitu:
 11. `score` untuk mencatat skor.
 12. `lives` untuk mencatat sisa nyawa.
 
-Terdapat beberapa atribut `final` yaitu `IBASKET_Y`, `IBASKET_X`, `DELAY`, dan `LIVES_TOTAL` yang masing-masingg merupakan posisi awal dari `basket`, _delay_ pada `timer`, dan total nyawa pada level.
+Terdapat beberapa atribut `final` yaitu `IBASKET_Y`, `IBASKET_X`, `DELAY`, dan `LIVES_TOTAL` yang masing-masing merupakan posisi awal dari `basket`, _delay_ pada `timer`, dan total nyawa pada level.
 
 Saat kelas dibuat, _constructor_ akan memanggil _method_ `initLevel` serta menginisialisasi `backButton` dan mengatur visibilitasnya menjadi `false` karena akan ditampilkan pada layar _game over_ saja.
 
@@ -605,6 +605,9 @@ Kelas ini juga mempunyai 2 _constant_ , yaitu `HEIGHT` dan `WIDTH` yang merupaka
 Selain itu, kelas ini juga mempunyai 2 atribut yang bersifat `static`, yaitu `cardLayout` dan `mainPanel` yang nantinya akan digunakan dalam mengatur _frame_.
 
 Selain terdapat `main`, di kelas ini juga terdapat `initUi` yang merupakan hasil modifikasi dari referensi **4** dan berfungsi untuk mengatur frame. `mainPanel` digunakan untuk tempat menambahkan objek _panel_ lain seperti `MainMenu`, `LevelSelect`, dll. `mainPanel` menggunakan _layout manager_ `cardLayout` sehingga dapat memudahkan penggantian panel yang ditampilkan. Perbedaan dengan referensi **4** adalah `mainPanel` dan `cardLayout` bersifat `static` sehingga dapat digunakan tanpa membuat objek baru di kelas lain.
+
+## **Demonstrasi Game**
+Untuk demonstrasi serta pengerjaan setiap anggota dan rekap jumlah commit dan baris kode dapat dilihat di [video YouTube](https://youtu.be/BQnSlQteePM).
 
 ## **Referensi**
 1. http://zetcode.com/javagames/collision/
